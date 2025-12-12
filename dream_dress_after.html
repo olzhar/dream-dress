@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Dress - ПОСЛЕ программы</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #fff9e6 50%, #ffeef8 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+        
+        .header .subtitle {
+            font-size: 18px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+        
+        .form-content {
+            padding: 40px 30px;
+        }
+        
+        .section-title {
+            color: #7ba67d;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8f5e9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c2c2c;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        
+        label .required {
+            color: #c1272d;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Montserrat', Arial, sans-serif;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #7ba67d;
+        }
+        
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ШКАЛЫ */
+        .scale-container {
+            background: #fdfbf7;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .scale-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+        }
+        
+        .scale-wrapper {
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        .scale-slider {
+            width: 100%;
+            height: 12px;
+            border-radius: 6px;
+            background: linear-gradient(to right, #c1272d 0%, #ff9800 25%, #ffc107 50%, #8bc34a 75%, #4caf50 100%);
+            appearance: none;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .scale-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #7ba67d;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .scale-slider::-moz-range-thumb {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #7ba67d;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .scale-labels .start {
+            text-align: left;
+            max-width: 45%;
+        }
+        
+        .scale-labels .end {
+            text-align: right;
+            max-width: 45%;
+        }
+        
+        .scale-value {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #7ba67d;
+        }
+        
+        /* ДАННЫЕ ДО */
+        .before-data {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #7ba67d;
+        }
+        
+        .before-data strong {
+            color: #7ba67d;
+        }
+        
+        /* КНОПКИ */
+        .btn {
+            background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(123, 166, 125, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(123, 166, 125, 0.5);
+        }
+        
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f2a687 0%, #e9967a 100%);
+            box-shadow: 0 6px 20px rgba(242, 166, 135, 0.4);
+        }
+        
+        /* СООБЩЕНИЯ */
+        .message-box {
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .success-message {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            color: #2e7d32;
+        }
+        
+        .error-message {
+            background: #ffebee;
+            border: 2px solid #c1272d;
+            color: #c1272d;
+        }
+        
+        /* Скрытые блоки */
+        #codeEntry {
+            display: block;
+        }
+        
+        #surveySection {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ПЛАТЬЕ МЕЧТЫ</h1>
+            <div class="subtitle">Детокс тела и эмоций для вашей трансформации</div>
+        </div>
+        
+        <div class="form-content">
+            <!-- ВВОД КОДА -->
+            <div id="codeEntry">
+                <h2 style="text-align: center; color: #2c2c2c; font-size: 28px; margin-bottom: 10px;">
+                    📋 ОПРОСНИК ПОСЛЕ ПРОХОЖДЕНИЯ ПРОГРАММЫ
+                </h2>
+                
+                <div class="info-box">
+                    <strong>👋 Добро пожаловать обратно!</strong><br><br>
+                    Введите ваш уникальный код из опросника ДО, чтобы загрузить ваши начальные данные и сравнить результаты.
+                </div>
+                
+                <div class="form-group">
+                    <label>Введите ваш код <span class="required">*</span></label>
+                    <input type="text" id="clientCodeInput" placeholder="Например: ABC12345" style="text-transform: uppercase;">
+                </div>
+                
+                <button type="button" class="btn" id="loadCodeBtn">
+                    🔍 Загрузить мои данные
+                </button>
+                
+                <div class="error-message" id="codeError"></div>
+            </div>
+            
+            <!-- ФОРМА ПОСЛЕ ЗАГРУЗКИ КОДА -->
+            <div id="surveySection">
+                <h2 style="text-align: center; color: #2c2c2c; font-size: 28px; margin-bottom: 20px;">
+                    🎉 Оцените ваши результаты ПОСЛЕ программы!
+                </h2>
+                
+                <div class="before-data" id="beforeDataDisplay"></div>
+                
+                <form id="surveyForm">
+                    <!-- АНТРОПОМЕТРИЯ -->
+                    <div class="section-title">📏 Антропометрические данные ПОСЛЕ</div>
+                    
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label>Вес (кг) <span class="required">*</span></label>
+                            <input type="number" name="weight_after" step="0.1" min="30" max="200" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Объём груди (см)</label>
+                            <input type="number" name="chest_after" min="50" max="200">
+                        </div>
+                    </div>
+                    
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label>Объём талии (см)</label>
+                            <input type="number" name="waist_after" min="40" max="200">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Объём бёдер (см)</label>
+                            <input type="number" name="hips_after" min="50" max="200">
+                        </div>
+                    </div>
+                    
+                    <!-- ШКАЛЫ СОСТОЯНИЯ -->
+                    <div class="section-title">⚡ Оцените ваше состояние ПОСЛЕ программы</div>
+                    
+                    <!-- Шкала 1: Энергия -->
+                    <div class="scale-container">
+                        <div class="scale-label">🔋 Уровень энергии</div>
+                        <div class="scale-wrapper">
+                            <input type="range" class="scale-slider" name="energy_after" min="1" max="10" value="5">
+                            <div class="scale-value">5/10</div>
+                            <div class="scale-labels">
+                                <div class="start">На нуле 😴</div>
+                                <div class="end">Ракета 🚀</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шкала 2: Стресс -->
+                    <div class="scale-container">
+                        <div class="scale-label">😰 Уровень стресса</div>
+                        <div class="scale-wrapper">
+                            <input type="range" class="scale-slider" name="stress_after" min="1" max="10" value="5">
+                            <div class="scale-value">5/10</div>
+                            <div class="scale-labels">
+                                <div class="start">Постоянный стресс, всё бесит 💢</div>
+                                <div class="end">Спокойствие и контроль над эмоциями 😌</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шкала 3: Сон -->
+                    <div class="scale-container">
+                        <div class="scale-label">😴 Качество сна</div>
+                        <div class="scale-wrapper">
+                            <input type="range" class="scale-slider" name="sleep_after" min="1" max="10" value="5">
+                            <div class="scale-value">5/10</div>
+                            <div class="scale-labels">
+                                <div class="start">Бессонница, не высыпаюсь 😵</div>
+                                <div class="end">Сплю как в детстве, с утра бодрость ☀️</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шкала 4: Пищеварение -->
+                    <div class="scale-container">
+                        <div class="scale-label">🍽️ Пищеварение</div>
+                        <div class="scale-wrapper">
+                            <input type="range" class="scale-slider" name="digestion_after" min="1" max="10" value="5">
+                            <div class="scale-value">5/10</div>
+                            <div class="scale-labels">
+                                <div class="start">Есть вопросы (вздутие, нарушение стула) 🤢</div>
+                                <div class="end">Пищеварение отличное ✅</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шкала 5: Движение -->
+                    <div class="scale-container">
+                        <div class="scale-label">🏃 Двигательная активность</div>
+                        <div class="scale-wrapper">
+                            <input type="range" class="scale-slider" name="movement_after" min="1" max="10" value="5">
+                            <div class="scale-value">5/10</div>
+                            <div class="scale-labels">
+                                <div class="start">Дом-работа-магазин на автобусе и метро 🚌</div>
+                                <div class="end">Ежедневная двигательная активность (ходьба, зарядка, фитнес) 💪</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шкала 6: Лёгкость в теле -->
+                    <div class="scale-container">
+                        <div class="scale-label">🦋 Лёгкость и комфорт в теле</div>
+                        <div class="scale-wrapper">
+                            <input type="range" class="scale-slider" name="lightness_after" min="1" max="10" value="5">
+                            <div class="scale-value">5/10</div>
+                            <div class="scale-labels">
+                                <div class="start">Тяжесть, отёки, дискомфорт 😓</div>
+                                <div class="end">Лёгкость и свобода движений! 🕊️</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шкала 7: Уверенность -->
+                    <div class="scale-container">
+                        <div class="scale-label">👗 Уверенность в достижении образа ПЛАТЬЕ МЕЧТЫ</div>
+                        <div class="scale-wrapper">
+                            <input type="range" class="scale-slider" name="confidence_after" min="1" max="10" value="5">
+                            <div class="scale-value">5/10</div>
+                            <div class="scale-labels">
+                                <div class="start">Не верю, что смогу 😞</div>
+                                <div class="end">Я уже в своём ПЛАТЬЕ МЕЧТЫ! ✨</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- РЕАЛИЗАЦИЯ ЦЕЛЕЙ -->
+                    <div class="section-title">🎯 Насколько реализованы ваши цели?</div>
+                    
+                    <div id="goalsRealization"></div>
+                    
+                    <button type="submit" class="btn btn-secondary" id="submitBtn">
+                        🎉 Завершить и увидеть результаты!
+                    </button>
+                </form>
+            </div>
+            
+            <!-- СООБЩЕНИЯ -->
+            <div class="message-box success-message" id="successMessage">
+                <h2 style="color: #4caf50; margin-bottom: 20px;">🎉 ПОЗДРАВЛЯЕМ!</h2>
+                <p>Вы завершили программу DREAM DRESS!<br>Нажмите кнопку ниже, чтобы увидеть сравнение ваших результатов.</p>
+                <button id="viewResultsBtn" class="btn" style="margin-top: 30px;">
+                    📊 ПОСМОТРЕТЬ РЕЗУЛЬТАТЫ
+                </button>
+            </div>
+            
+            <div class="message-box error-message" id="errorMessage"></div>
+        </div>
+    </div>
+    
+    <script>
+        let beforeData = null;
+        
+        // Загрузка данных по коду
+        document.getElementById('loadCodeBtn').addEventListener('click', function() {
+            const code = document.getElementById('clientCodeInput').value.trim().toUpperCase();
+            
+            if (!code) {
+                showError('Пожалуйста, введите код');
+                return;
+            }
+            
+            // Поиск в localStorage
+            const storageKey = 'dreamdress_before_' + code;
+            const storedData = localStorage.getItem(storageKey);
+            
+            if (storedData) {
+                beforeData = JSON.parse(storedData);
+                loadSurvey();
+            } else {
+                showError('Код не найден. Проверьте правильность ввода.');
+            }
+        });
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('codeError');
+            errorDiv.textContent = '❌ ' + message;
+            errorDiv.style.display = 'block';
+        }
+        
+        function loadSurvey() {
+            // Скрываем ввод кода
+            document.getElementById('codeEntry').style.display = 'none';
+            document.getElementById('surveySection').style.display = 'block';
+            
+            // Показываем данные ДО
+            const beforeDisplay = document.getElementById('beforeDataDisplay');
+            beforeDisplay.innerHTML = `
+                <div style="text-align: center; margin-bottom: 15px; font-size: 18px; font-weight: 600; color: #7ba67d;">
+                    Ваши данные ДО программы:
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 15px;">
+                    <div><strong>Имя:</strong> ${beforeData.name}</div>
+                    <div><strong>Возраст:</strong> ${beforeData.age} лет</div>
+                    <div><strong>Вес:</strong> ${beforeData.weight} кг</div>
+                    <div><strong>Рост:</strong> ${beforeData.height} см</div>
+                    ${beforeData.chest ? `<div><strong>Грудь:</strong> ${beforeData.chest} см</div>` : ''}
+                    ${beforeData.waist ? `<div><strong>Талия:</strong> ${beforeData.waist} см</div>` : ''}
+                    ${beforeData.hips ? `<div><strong>Бёдра:</strong> ${beforeData.hips} см</div>` : ''}
+                </div>
+            `;
+            
+            // Предзаполняем измерения
+            if (beforeData.chest) document.querySelector('[name="chest_after"]').value = beforeData.chest;
+            if (beforeData.waist) document.querySelector('[name="waist_after"]').value = beforeData.waist;
+            if (beforeData.hips) document.querySelector('[name="hips_after"]').value = beforeData.hips;
+            
+            // Загружаем цели
+            const goalsDiv = document.getElementById('goalsRealization');
+            let goalsHTML = '';
+            
+            if (beforeData.goal_physical) {
+                goalsHTML += `
+                    <div class="form-group">
+                        <label>По физическому здоровью:</label>
+                        <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 14px;">
+                            Ваша цель: "${beforeData.goal_physical}"
+                        </div>
+                        <textarea name="goal_physical_result" placeholder="Насколько реализована? Что изменилось?"></textarea>
+                    </div>
+                `;
+            }
+            
+            if (beforeData.goal_emotional) {
+                goalsHTML += `
+                    <div class="form-group">
+                        <label>По эмоциональному здоровью:</label>
+                        <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 14px;">
+                            Ваша цель: "${beforeData.goal_emotional}"
+                        </div>
+                        <textarea name="goal_emotional_result" placeholder="Насколько реализована? Что изменилось?"></textarea>
+                    </div>
+                `;
+            }
+            
+            if (beforeData.goal_image) {
+                goalsHTML += `
+                    <div class="form-group">
+                        <label>По образу Новая Я в ПЛАТЬЕ МЕЧТЫ:</label>
+                        <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 14px;">
+                            Ваша цель: "${beforeData.goal_image}"
+                        </div>
+                        <textarea name="goal_image_result" placeholder="Насколько реализована? Что изменилось?"></textarea>
+                    </div>
+                `;
+            }
+            
+            goalsDiv.innerHTML = goalsHTML || '<p style="color: #666;">Цели не были указаны в опроснике ДО</p>';
+        }
+        
+        // Инициализация шкал
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('scale-slider')) {
+                const valueDisplay = e.target.parentElement.querySelector('.scale-value');
+                valueDisplay.textContent = e.target.value + '/10';
+            }
+        });
+        
+        // Отправка формы
+        document.getElementById('surveyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+            
+            // Собираем данные ПОСЛЕ
+            const formData = new FormData(this);
+            const afterData = {};
+            formData.forEach((value, key) => {
+                afterData[key] = value;
+            });
+            
+            // Комбинируем с данными ДО
+            const fullData = {
+                client_code: beforeData.client_code,
+                timestamp_before: beforeData.timestamp,
+                timestamp_after: new Date().toISOString(),
+                ...beforeData,
+                ...afterData
+            };
+            
+            try {
+                // Отправка в Google Sheets
+                const response = await fetch('https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID_AFTER/exec', {
+                    method: 'POST',
+                    body: JSON.stringify(fullData)
+                });
+                
+                if (response.ok) {
+                    // Сохраняем результаты
+                    window.resultsData = fullData;
+                    
+                    // Показываем сообщение
+                    document.getElementById('surveySection').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                } else {
+                    throw new Error('Ошибка отправки');
+                }
+            } catch (error) {
+                document.getElementById('errorMessage').textContent = '❌ Ошибка отправки данных. Попробуйте еще раз.';
+                document.getElementById('errorMessage').style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = '🎉 Завершить и увидеть результаты!';
+            }
+        });
+        
+        // Просмотр результатов
+        document.getElementById('viewResultsBtn').addEventListener('click', function() {
+            generateResultsPDF();
+        });
+        
+        function generateResultsPDF() {
+            const data = window.resultsData;
+            if (!data) return;
+            
+            // Расчёты
+            const weightDiff = (data.weight_after - data.weight).toFixed(1);
+            const waistDiff = data.waist && data.waist_after ? (data.waist_after - data.waist) : null;
+            const hipsDiff = data.hips && data.hips_after ? (data.hips_after - data.hips) : null;
+            const chestDiff = data.chest && data.chest_after ? (data.chest_after - data.chest) : null;
+            
+            const scales = [
+                { name: '🔋 Энергия', before: data.energy, after: data.energy_after },
+                { name: '😰 Стресс', before: data.stress, after: data.stress_after },
+                { name: '😴 Сон', before: data.sleep, after: data.sleep_after },
+                { name: '🍽️ Пищеварение', before: data.digestion, after: data.digestion_after },
+                { name: '🏃 Движение', before: data.movement, after: data.movement_after },
+                { name: '🦋 Лёгкость в теле', before: data.lightness, after: data.lightness_after },
+                { name: '👗 Уверенность в достижении ПЛАТЬЕ МЕЧТЫ', before: data.confidence, after: data.confidence_after }
+            ];
+            
+            const printContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dream Dress - Результаты ПОСЛЕ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            margin: 20px;
+            background: white;
+        }
+        .header {
+            background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            margin: -20px -20px 20px -20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 20px;
+        }
+        .congrats {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 22px;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .section-title {
+            color: #7ba67d;
+            font-size: 24px;
+            border-bottom: 2px solid #e8f5e9;
+            padding-bottom: 10px;
+            margin: 30px 0 15px 0;
+        }
+        .comparison-table {
+            width: 100%;
+            margin: 15px 0;
+        }
+        .comparison-table th {
+            background: #e8f5e9;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .diff-positive {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .diff-negative {
+            color: #c1272d;
+            font-weight: bold;
+        }
+        .scale-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #fdfbf7;
+            border-radius: 8px;
+        }
+        .scale-name {
+            font-weight: 600;
+            flex: 1;
+        }
+        .scale-values {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .scale-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .goal-box {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .goal-title {
+            font-weight: 600;
+            color: #7ba67d;
+            margin-bottom: 8px;
+        }
+        .goal-original {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .goal-result {
+            color: #2c2c2c;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ПЛАТЬЕ МЕЧТЫ</h1>
+        <p>🎉 ПОЗДРАВЛЯЕМ С ЗАВЕРШЕНИЕМ ПРОГРАММЫ!</p>
+    </div>
+    
+    <div class="congrats">
+        ${data.name}, вы прошли программу DREAM DRESS!<br>
+        Посмотрите на ваши удивительные результаты ✨
+    </div>
+    
+    <h2 class="section-title">📊 АНТРОПОМЕТРИЯ</h2>
+    <table class="comparison-table">
+        <tr>
+            <th>Параметр</th>
+            <th>ДО</th>
+            <th>ПОСЛЕ</th>
+            <th>Изменение</th>
+        </tr>
+        <tr>
+            <td><strong>Вес</strong></td>
+            <td>${data.weight} кг</td>
+            <td>${data.weight_after} кг</td>
+            <td class="${weightDiff < 0 ? 'diff-positive' : 'diff-negative'}">
+                ${weightDiff > 0 ? '+' : ''}${weightDiff} кг
+            </td>
+        </tr>
+        ${data.waist && data.waist_after ? `
+        <tr>
+            <td><strong>Талия</strong></td>
+            <td>${data.waist} см</td>
+            <td>${data.waist_after} см</td>
+            <td class="${waistDiff < 0 ? 'diff-positive' : 'diff-negative'}">
+                ${waistDiff > 0 ? '+' : ''}${waistDiff} см
+            </td>
+        </tr>
+        ` : ''}
+        ${data.hips && data.hips_after ? `
+        <tr>
+            <td><strong>Бёдра</strong></td>
+            <td>${data.hips} см</td>
+            <td>${data.hips_after} см</td>
+            <td class="${hipsDiff < 0 ? 'diff-positive' : 'diff-negative'}">
+                ${hipsDiff > 0 ? '+' : ''}${hipsDiff} см
+            </td>
+        </tr>
+        ` : ''}
+        ${data.chest && data.chest_after ? `
+        <tr>
+            <td><strong>Грудь</strong></td>
+            <td>${data.chest} см</td>
+            <td>${data.chest_after} см</td>
+            <td class="${chestDiff < 0 ? 'diff-negative' : chestDiff > 0 ? 'diff-positive' : ''}">
+                ${chestDiff > 0 ? '+' : ''}${chestDiff} см
+            </td>
+        </tr>
+        ` : ''}
+    </table>
+    
+    <h2 class="section-title">⚡ ИЗМЕНЕНИЕ СОСТОЯНИЯ</h2>
+    ${scales.map(scale => {
+        const diff = scale.after - scale.before;
+        return `
+        <div class="scale-row">
+            <div class="scale-name">${scale.name}</div>
+            <div class="scale-values">
+                <span>ДО: <span class="scale-value" style="color: #c17b6f;">${scale.before}/10</span></span>
+                <span style="font-size: 24px; color: #7ba67d;">→</span>
+                <span>ПОСЛЕ: <span class="scale-value" style="color: #7ba67d;">${scale.after}/10</span></span>
+                <span class="${diff > 0 ? 'diff-positive' : diff < 0 ? 'diff-negative' : ''}">(${diff > 0 ? '+' : ''}${diff})</span>
+            </div>
+        </div>
+        `;
+    }).join('')}
+    
+    ${(data.goal_physical_result || data.goal_emotional_result || data.goal_image_result) ? `
+    <h2 class="section-title">🎯 РЕАЛИЗАЦИЯ ЦЕЛЕЙ</h2>
+    ${data.goal_physical_result ? `
+    <div class="goal-box">
+        <div class="goal-title">По физическому здоровью:</div>
+        <div class="goal-original">"${data.goal_physical}"</div>
+        <div class="goal-result">${data.goal_physical_result}</div>
+    </div>
+    ` : ''}
+    ${data.goal_emotional_result ? `
+    <div class="goal-box">
+        <div class="goal-title">По эмоциональному здоровью:</div>
+        <div class="goal-original">"${data.goal_emotional}"</div>
+        <div class="goal-result">${data.goal_emotional_result}</div>
+    </div>
+    ` : ''}
+    ${data.goal_image_result ? `
+    <div class="goal-box">
+        <div class="goal-title">По образу Новая Я:</div>
+        <div class="goal-original">"${data.goal_image}"</div>
+        <div class="goal-result">${data.goal_image_result}</div>
+    </div>
+    ` : ''}
+    ` : ''}
+    
+    <div style="text-align: center; margin-top: 40px; padding: 30px; background: #e8f5e9; border-radius: 12px;">
+        <div style="font-size: 24px; color: #7ba67d; font-weight: bold; margin-bottom: 15px;">
+            ✨ ВЫ МОЛОДЕЦ! ✨
+        </div>
+        <div style="font-size: 18px; color: #2c2c2c; line-height: 1.8;">
+            Вы завершили программу ПЛАТЬЕ МЕЧТЫ и достигли удивительных результатов!<br>
+            Продолжайте в том же духе! 💚
+        </div>
+    </div>
+</body>
+</html>
+            `;
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+    </script>
+</body>
+</html>
