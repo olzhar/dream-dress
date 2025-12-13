@@ -455,7 +455,7 @@
             <!-- СООБЩЕНИЯ -->
             <div class="message-box success-message" id="successMessage">
                 <h2 style="color: #4caf50; margin-bottom: 20px;">🎉 ПОЗДРАВЛЯЕМ!</h2>
-                <p>Вы завершили программу DREAM DRESS!<br>Нажмите кнопку ниже, чтобы увидеть сравнение ваших результатов.</p>
+                <p>Вы завершили программу ПЛАТЬЕ МЕЧТЫ!<br>Нажмите кнопку ниже, чтобы увидеть сравнение ваших результатов.</p>
                 <button id="viewResultsBtn" class="btn" style="margin-top: 30px;">
                     📊 ПОСМОТРЕТЬ РЕЗУЛЬТАТЫ
                 </button>
@@ -507,20 +507,14 @@
                     Ваши данные ДО программы:
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 15px;">
-                    <div><strong>Имя:</strong> ${beforeData.name}</div>
-                    <div><strong>Возраст:</strong> ${beforeData.age} лет</div>
                     <div><strong>Вес:</strong> ${beforeData.weight} кг</div>
-                    <div><strong>Рост:</strong> ${beforeData.height} см</div>
                     ${beforeData.chest ? `<div><strong>Грудь:</strong> ${beforeData.chest} см</div>` : ''}
                     ${beforeData.waist ? `<div><strong>Талия:</strong> ${beforeData.waist} см</div>` : ''}
                     ${beforeData.hips ? `<div><strong>Бёдра:</strong> ${beforeData.hips} см</div>` : ''}
                 </div>
             `;
             
-            // Предзаполняем измерения
-            if (beforeData.chest) document.querySelector('[name="chest_after"]').value = beforeData.chest;
-            if (beforeData.waist) document.querySelector('[name="waist_after"]').value = beforeData.waist;
-            if (beforeData.hips) document.querySelector('[name="hips_after"]').value = beforeData.hips;
+            // НЕ предзаполняем измерения - пользователь вводит сам
             
             // Загружаем цели
             const goalsDiv = document.getElementById('goalsRealization');
@@ -660,6 +654,7 @@
             font-family: 'Montserrat', Arial, sans-serif;
             margin: 20px;
             background: white;
+            font-size: 18px;
         }
         .header {
             background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%);
@@ -737,7 +732,7 @@
             align-items: center;
         }
         .scale-value {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
         }
         .goal-box {
@@ -752,7 +747,7 @@
             margin-bottom: 8px;
         }
         .goal-original {
-            font-size: 14px;
+            font-size: 18px;
             color: #666;
             margin-bottom: 8px;
             font-style: italic;
@@ -766,10 +761,11 @@
 <body>
     <div class="header">
         <h1>ПЛАТЬЕ МЕЧТЫ</h1>
-        <p>🎉 Поздравляем! ${data.name}, вы завершили программу!</p>
+        <p>🎉 ПОЗДРАВЛЯЕМ С ЗАВЕРШЕНИЕМ ПРОГРАММЫ!</p>
     </div>
     
     <div class="congrats">
+        ${data.name}, вы прошли программу ПЛАТЬЕ МЕЧТЫ!<br>
         Посмотрите на ваши удивительные результаты ✨
     </div>
     
@@ -862,93 +858,13 @@
     ` : ''}
     ` : ''}
     
-    <div style="background: linear-gradient(135deg, #fff9e6 0%, #e8f5e9 100%); padding: 40px; border-radius: 20px; margin-top: 40px; border: 3px solid #d4af7a;">
-        <div style="text-align: center; font-size: 36px; color: #d4af7a; margin-bottom: 25px; font-weight: bold;">
-            ✨ КАКАЯ ВЫ УМНИЦА!
+    <div style="text-align: center; margin-top: 40px; padding: 30px; background: #e8f5e9; border-radius: 12px;">
+        <div style="font-size: 24px; color: #7ba67d; font-weight: bold; margin-bottom: 15px;">
+            ✨ ВЫ МОЛОДЕЦ! ✨
         </div>
-        
-        <div style="font-size: 20px; line-height: 1.8; color: #2c2c2c; margin-bottom: 20px;">
-            <p style="margin: 0 0 15px 0;">Вы заложили основы преображения... Новая реальность – следствие новой личности...</p>
-            
-            <p style="margin: 0 0 20px 0;"><strong>Готовы продолжить путь к Новой Я?</strong></p>
-        </div>
-        
-        <div style="font-size: 18px; line-height: 1.7; color: #2c2c2c; margin-bottom: 20px;">
-            <div style="margin-bottom: 12px;">
-                <span style="color: #d4af7a; font-size: 24px;">💫</span> 
-                <strong>Питание</strong> – вкусно и полезно
-            </div>
-            <div style="margin-bottom: 12px;">
-                <span style="color: #d4af7a; font-size: 24px;">💫</span> 
-                <strong>Оздоровление</strong> – индивидуальная программа
-            </div>
-            <div style="margin-bottom: 12px;">
-                <span style="color: #d4af7a; font-size: 24px;">💫</span> 
-                <strong>Психика</strong> – работа с установками и образом себя
-            </div>
-        </div>
-        
-        <div style="font-size: 20px; line-height: 1.8; color: #2c2c2c; margin-bottom: 25px;">
-            <p style="margin: 0 0 15px 0; font-weight: 500;">В результате нашей совместной работы меняется не только тело и мышление, но и вся жизнь.</p>
-            
-            <div style="margin: 25px 0; text-align: center;">
-                <p style="margin: 0 0 18px 0; font-weight: bold; color: #7ba67d; font-size: 28px;">
-                    🎁 Для вас скидка 20% на консультацию!
-                </p>
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://t.me/olga_zharkova_health" 
-                       target="_blank" 
-                       style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #0088cc 0%, #0066aa 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 18px; box-shadow: 0 4px 12px rgba(0,136,204,0.3);">
-                        📱 Telegram
-                    </a>
-                    <a href="https://wa.me/79037562233" 
-                       target="_blank" 
-                       style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 18px; box-shadow: 0 4px 12px rgba(37,211,102,0.3);">
-                        💬 WhatsApp
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div style="background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%); padding: 20px 25px; border-radius: 15px; margin-top: 20px; box-shadow: 0 5px 15px rgba(123,166,125,0.3);">
-            <a href="https://t.me/izdorovi" target="_blank" style="text-decoration: none; display: block;">
-                <div style="text-align: center; color: white;">
-                    <div style="font-size: 20px; font-weight: bold; margin-bottom: 8px;">
-                        📢 Присоединяйтесь к моему Telegram-каналу!
-                    </div>
-                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 5px;">
-                        "Путь к здоровью и призванию"
-                    </div>
-                    <div style="font-size: 16px; font-weight: 600;">
-                        t.me/izdorovi
-                    </div>
-                    <div style="font-size: 14px; opacity: 0.95; margin-top: 8px; line-height: 1.4;">
-                        О питании, здоровье и психологии для женщин
-                    </div>
-                </div>
-            </a>
-        </div>
-        
-        <div style="border-top: 2px solid #d4af7a; padding-top: 20px; margin-top: 25px; text-align: center;">
-            <div style="font-size: 20px; color: #7ba67d; font-weight: bold; margin-bottom: 12px;">
-                С любовью и верой в вас! 💚
-            </div>
-            
-            <div style="font-size: 24px; color: #d4af7a; font-weight: bold; margin-bottom: 12px;">
-                ПЛАТЬЕ МЕЧТЫ 👗
-            </div>
-            <div style="font-size: 20px; color: #2c2c2c; font-weight: bold; margin-bottom: 12px;">
-                Ольга Жаркова
-            </div>
-            <div style="font-size: 18px; color: #6b6b6b; margin-bottom: 10px;">
-                Нутрициолог-психолог
-            </div>
-            <div style="font-size: 18px; color: #2c2c2c; margin-bottom: 10px;">
-                📞 +7-903-756-22-33
-            </div>
-            <div style="font-size: 18px; margin-top: 10px;">
-                📱 <a href="https://t.me/olga_zharkova_health" target="_blank" style="color: #0088cc; text-decoration: none; font-weight: 600;">t.me/olga_zharkova_health</a>
-            </div>
+        <div style="font-size: 18px; color: #2c2c2c; line-height: 1.8;">
+            Вы завершили программу ПЛАТЬЕ МЕЧТЫ и достигли удивительных результатов!<br>
+            Продолжайте в том же духе! 💚
         </div>
     </div>
 </body>
