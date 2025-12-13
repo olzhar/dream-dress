@@ -43,7 +43,7 @@
         }
         
         .header .subtitle {
-            font-size: 18px;
+            font-size: 20px;
             opacity: 0.95;
             font-weight: 400;
         }
@@ -133,7 +133,7 @@
         }
         
         .scale-label {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #2c2c2c;
             margin-bottom: 15px;
@@ -222,7 +222,7 @@
             border: none;
             padding: 18px 40px;
             border-radius: 12px;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             cursor: pointer;
             width: 100%;
@@ -510,7 +510,7 @@
             // Показываем данные ДО
             const beforeDisplay = document.getElementById('beforeDataDisplay');
             beforeDisplay.innerHTML = `
-                <div style="text-align: center; margin-bottom: 15px; font-size: 18px; font-weight: 600; color: #7ba67d;">
+                <div style="text-align: center; margin-bottom: 15px; font-size: 20px; font-weight: 600; color: #7ba67d;">
                     Ваши данные ДО программы:
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 15px;">
@@ -567,11 +567,22 @@
         }
         
         // Инициализация шкал
-        document.addEventListener('input', function(e) {
-            if (e.target.classList.contains('scale-slider')) {
-                const valueDisplay = e.target.parentElement.querySelector('.scale-value');
-                valueDisplay.textContent = e.target.value + '/10';
-            }
+        document.querySelectorAll('.scale-slider').forEach(slider => {
+            const valueDisplay = slider.parentElement.querySelector('.scale-value');
+            
+            slider.addEventListener('input', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                valueDisplay.textContent = this.value + '/10';
+            });
+            
+            // Предотвращаем фокус на других элементах
+            slider.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            });
+            slider.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
         });
         
         // Отправка формы
@@ -661,7 +672,7 @@
             font-family: 'Montserrat', Arial, sans-serif;
             margin: 20px;
             background: white;
-            font-size: 18px;
+            font-size: 20px;
         }
         .header {
             background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%);
@@ -706,13 +717,13 @@
             padding: 12px;
             text-align: center;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 20px;
         }
         .comparison-table td {
             padding: 12px;
             text-align: center;
             border-bottom: 1px solid #e0e0e0;
-            font-size: 18px;
+            font-size: 20px;
         }
         .diff-positive {
             color: #4caf50;
@@ -734,7 +745,7 @@
         .scale-name {
             font-weight: 600;
             flex: 1;
-            font-size: 18px;
+            font-size: 20px;
         }
         .scale-values {
             display: flex;
@@ -742,7 +753,7 @@
             align-items: center;
         }
         .scale-value {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
         }
         .goal-box {
@@ -755,10 +766,10 @@
             font-weight: 600;
             color: #7ba67d;
             margin-bottom: 8px;
-            font-size: 18px;
+            font-size: 20px;
         }
         .goal-original {
-            font-size: 18px;
+            font-size: 20px;
             color: #666;
             margin-bottom: 8px;
             font-style: italic;
@@ -766,7 +777,7 @@
         .goal-result {
             color: #2c2c2c;
             line-height: 1.6;
-            font-size: 18px;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -875,7 +886,7 @@
             ✨ КАКАЯ ВЫ УМНИЦА!
         </div>
         
-        <div style="font-size: 18px; line-height: 1.7; color: #2c2c2c; margin-bottom: 18px;">
+        <div style="font-size: 20px; line-height: 1.7; color: #2c2c2c; margin-bottom: 18px;">
             <p style="margin: 0 0 12px 0;">Вы заложили основы преображения... Новая реальность – следствие новой личности...</p>
             
             <p style="margin: 0 0 15px 0;"><strong>Готовы продолжить путь к Новой Я?</strong></p>
@@ -896,7 +907,7 @@
             </div>
         </div>
         
-        <div style="font-size: 18px; line-height: 1.7; color: #2c2c2c; margin-bottom: 20px;">
+        <div style="font-size: 20px; line-height: 1.7; color: #2c2c2c; margin-bottom: 20px;">
             <p style="margin: 0 0 12px 0; font-weight: 500;">В результате нашей совместной работы меняется не только тело и мышление, но и вся жизнь.</p>
             
             <div style="margin: 20px 0; text-align: center;">
@@ -945,7 +956,7 @@
             <div style="font-size: 20px; color: #d4af7a; font-weight: bold; margin-bottom: 10px;">
                 ПЛАТЬЕ МЕЧТЫ 👗
             </div>
-            <div style="font-size: 18px; color: #2c2c2c; font-weight: bold; margin-bottom: 10px;">
+            <div style="font-size: 20px; color: #2c2c2c; font-weight: bold; margin-bottom: 10px;">
                 Ольга Жаркова
             </div>
             <div style="font-size: 16px; color: #6b6b6b; margin-bottom: 8px;">

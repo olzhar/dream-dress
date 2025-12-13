@@ -519,8 +519,18 @@
         document.querySelectorAll('.scale-slider').forEach(slider => {
             const valueDisplay = slider.parentElement.querySelector('.scale-value');
             
-            slider.addEventListener('input', function() {
+            slider.addEventListener('input', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 valueDisplay.textContent = this.value + '/10';
+            });
+            
+            // Предотвращаем фокус на других элементах при движении шкалы
+            slider.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            });
+            slider.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
             });
         });
         
@@ -609,6 +619,7 @@
             margin: 20px;
             padding: 0;
             background: white;
+            font-size: 16px;
         }
         .header {
             background: linear-gradient(135deg, #e8b4bc 0%, #d4af7a 100%);
@@ -637,7 +648,7 @@
         }
         .code-label {
             color: #d4af7a;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             margin-bottom: 8px;
         }
@@ -662,7 +673,7 @@
             margin-bottom: 8px;
             background: #fdfbf7;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 18px;
         }
         .data-row strong {
             color: #2c2c2c;
@@ -677,10 +688,11 @@
             font-weight: 600;
             color: #2c2c2c;
             margin-bottom: 5px;
+            font-size: 18px;
         }
         .scale-result {
             color: #d4af7a;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
         }
         .goal-text {
@@ -689,6 +701,7 @@
             border-radius: 6px;
             margin-bottom: 10px;
             line-height: 1.6;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -705,7 +718,7 @@
     </div>
     
     <div class="section">
-        <h2 class="section-title">👤 ЛИЧНЫЕ ДАННЫЕ</h2>
+        <h2 class="section-title">ЛИЧНЫЕ ДАННЫЕ</h2>
         <div class="data-row"><strong>Имя:</strong> ${data.name}</div>
         <div class="data-row"><strong>Возраст:</strong> ${data.age} лет</div>
         <div class="data-row"><strong>Телефон:</strong> ${data.phone}</div>
