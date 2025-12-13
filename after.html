@@ -571,17 +571,14 @@
             const valueDisplay = slider.parentElement.querySelector('.scale-value');
             
             slider.addEventListener('input', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
                 valueDisplay.textContent = this.value + '/10';
+                // Убираем фокус со всех input чтобы не было автоскролла
+                document.querySelectorAll('input[type="number"]').forEach(input => input.blur());
             });
             
-            // Предотвращаем фокус на других элементах
+            // Предотвращаем автоскролл при touch
             slider.addEventListener('touchstart', function(e) {
-                e.stopPropagation();
-            });
-            slider.addEventListener('mousedown', function(e) {
-                e.stopPropagation();
+                document.querySelectorAll('input[type="number"]').forEach(input => input.blur());
             });
         });
         
@@ -672,7 +669,7 @@
             font-family: 'Montserrat', Arial, sans-serif;
             margin: 20px;
             background: white;
-            font-size: 20px;
+            font-size: 28px;
         }
         .header {
             background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%);
@@ -689,7 +686,7 @@
         }
         .header p {
             margin: 10px 0 0 0;
-            font-size: 20px;
+            font-size: 28px;
         }
         .congrats {
             background: #e8f5e9;
@@ -697,13 +694,13 @@
             border-radius: 12px;
             text-align: center;
             margin: 20px 0;
-            font-size: 22px;
+            font-size: 28px;
             color: #2e7d32;
             font-weight: 600;
         }
         .section-title {
             color: #7ba67d;
-            font-size: 24px;
+            font-size: 28px;
             border-bottom: 2px solid #e8f5e9;
             padding-bottom: 10px;
             margin: 30px 0 15px 0;
@@ -717,13 +714,13 @@
             padding: 12px;
             text-align: center;
             font-weight: 600;
-            font-size: 20px;
+            font-size: 28px;
         }
         .comparison-table td {
             padding: 12px;
             text-align: center;
             border-bottom: 1px solid #e0e0e0;
-            font-size: 20px;
+            font-size: 28px;
         }
         .diff-positive {
             color: #4caf50;
@@ -745,7 +742,7 @@
         .scale-name {
             font-weight: 600;
             flex: 1;
-            font-size: 20px;
+            font-size: 28px;
         }
         .scale-values {
             display: flex;
@@ -753,7 +750,7 @@
             align-items: center;
         }
         .scale-value {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
         }
         .goal-box {
@@ -766,10 +763,10 @@
             font-weight: 600;
             color: #7ba67d;
             margin-bottom: 8px;
-            font-size: 20px;
+            font-size: 28px;
         }
         .goal-original {
-            font-size: 20px;
+            font-size: 28px;
             color: #666;
             margin-bottom: 8px;
             font-style: italic;
@@ -777,7 +774,7 @@
         .goal-result {
             color: #2c2c2c;
             line-height: 1.6;
-            font-size: 20px;
+            font-size: 28px;
         }
     </style>
 </head>
@@ -848,7 +845,7 @@
             <div class="scale-name">${scale.name}</div>
             <div class="scale-values">
                 <span>ДО: <span class="scale-value" style="color: #c17b6f;">${scale.before}/10</span></span>
-                <span style="font-size: 24px; color: #7ba67d;">→</span>
+                <span style="font-size: 28px; color: #7ba67d;">→</span>
                 <span>ПОСЛЕ: <span class="scale-value" style="color: #7ba67d;">${scale.after}/10</span></span>
                 <span class="${diff > 0 ? 'diff-positive' : diff < 0 ? 'diff-negative' : ''}">(${diff > 0 ? '+' : ''}${diff})</span>
             </div>

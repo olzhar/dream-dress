@@ -110,6 +110,12 @@
         textarea:focus {
             outline: none;
             border-color: #d4af7a;
+            scroll-margin: 0;
+        }
+        
+        /* Предотвращаем автоскролл при фокусе */
+        input[type="number"] {
+            scroll-margin-top: 0;
         }
         
         textarea {
@@ -520,17 +526,14 @@
             const valueDisplay = slider.parentElement.querySelector('.scale-value');
             
             slider.addEventListener('input', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
                 valueDisplay.textContent = this.value + '/10';
+                // Убираем фокус со всех input чтобы не было автоскролла
+                document.querySelectorAll('input[type="number"]').forEach(input => input.blur());
             });
             
-            // Предотвращаем фокус на других элементах при движении шкалы
+            // Предотвращаем автоскролл при touch
             slider.addEventListener('touchstart', function(e) {
-                e.stopPropagation();
-            });
-            slider.addEventListener('mousedown', function(e) {
-                e.stopPropagation();
+                document.querySelectorAll('input[type="number"]').forEach(input => input.blur());
             });
         });
         
@@ -619,7 +622,7 @@
             margin: 20px;
             padding: 0;
             background: white;
-            font-size: 16px;
+            font-size: 24px;
         }
         .header {
             background: linear-gradient(135deg, #e8b4bc 0%, #d4af7a 100%);
@@ -636,7 +639,7 @@
         }
         .header p {
             margin: 10px 0 0 0;
-            font-size: 20px;
+            font-size: 24px;
             opacity: 0.95;
         }
         .code-box {
@@ -648,7 +651,7 @@
         }
         .code-label {
             color: #d4af7a;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 600;
             margin-bottom: 8px;
         }
@@ -673,7 +676,7 @@
             margin-bottom: 8px;
             background: #fdfbf7;
             border-radius: 6px;
-            font-size: 18px;
+            font-size: 24px;
         }
         .data-row strong {
             color: #2c2c2c;
@@ -688,11 +691,11 @@
             font-weight: 600;
             color: #2c2c2c;
             margin-bottom: 5px;
-            font-size: 18px;
+            font-size: 24px;
         }
         .scale-result {
             color: #d4af7a;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
         }
         .goal-text {
@@ -701,7 +704,7 @@
             border-radius: 6px;
             margin-bottom: 10px;
             line-height: 1.6;
-            font-size: 18px;
+            font-size: 24px;
         }
     </style>
 </head>
