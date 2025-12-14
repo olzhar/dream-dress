@@ -613,10 +613,16 @@
                 window.resultsData = fullData;
                 
                 // Отправка в Google Sheets (ТОЛЬКО ОДИН РАЗ!)
+                console.log('🔍 ПОСЛЕ - Проверка флага window.alreadySentToSheetsPosle:', window.alreadySentToSheetsPosle);
+                
                 if (!window.alreadySentToSheetsPosle) {
+                    console.log('✅ ПОСЛЕ - Флаг НЕ установлен - начинаем отправку');
                     window.alreadySentToSheetsPosle = true;  // Устанавливаем флаг СРАЗУ
+                    console.log('🔒 ПОСЛЕ - Флаг установлен:', window.alreadySentToSheetsPosle);
                     
                     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
+                    
+                    console.log('📤 ПОСЛЕ - Отправляемые данные:', fullData);
                     
                     fetch(googleSheetUrl, {
                         method: 'POST',
@@ -630,6 +636,8 @@
                     }).catch(err => {
                         console.error('❌ Ошибка отправки ПОСЛЕ:', err);
                     });
+                } else {
+                    console.log('⛔ ПОСЛЕ - Флаг УЖЕ установлен - отправка ЗАБЛОКИРОВАНА');
                 }
                 
                 // Показываем сообщение
