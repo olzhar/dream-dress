@@ -555,6 +555,7 @@
             // Генерируем код клиента
             const clientCode = generateClientCode();
             data.client_code = clientCode;
+            data.sheet_name = "Опросник ДО";  // Для Google Sheets
             data.timestamp = new Date().toISOString();
             
             try {
@@ -562,7 +563,7 @@
                 localStorage.setItem('dreamdress_before_' + clientCode, JSON.stringify(data));
                 
                 // ОПЦИОНАЛЬНО: Отправка в Google Sheets (если настроен URL)
-                const googleSheetUrl = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec';
+                const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
                 if (!googleSheetUrl.includes('YOUR_DEPLOYMENT_ID')) {
                     // URL настроен - отправляем
                     fetch(googleSheetUrl, {

@@ -600,6 +600,7 @@
             // Комбинируем с данными ДО
             const fullData = {
                 client_code: beforeData.client_code,
+                sheet_name: "Опросник ПОСЛЕ",  // Для Google Sheets
                 timestamp_before: beforeData.timestamp,
                 timestamp_after: new Date().toISOString(),
                 ...beforeData,
@@ -611,7 +612,7 @@
                 window.resultsData = fullData;
                 
                 // ОПЦИОНАЛЬНО: Отправка в Google Sheets (если настроен URL)
-                const googleSheetUrl = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID_AFTER/exec';
+                const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
                 if (!googleSheetUrl.includes('YOUR_DEPLOYMENT_ID')) {
                     // URL настроен - отправляем
                     fetch(googleSheetUrl, {
