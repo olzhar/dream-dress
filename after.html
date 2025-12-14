@@ -601,6 +601,7 @@
             const fullData = {
                 client_code: beforeData.client_code,
                 sheet_name: "Опросник ПОСЛЕ",  // Для Google Sheets
+                surveyType: "POSLE",  // ВАЖНО: тип опросника для Google Script
                 timestamp_before: beforeData.timestamp,
                 timestamp_after: new Date().toISOString(),
                 ...beforeData,
@@ -611,17 +612,24 @@
                 // Сохраняем результаты локально
                 window.resultsData = fullData;
                 
-                // ОПЦИОНАЛЬНО: Отправка в Google Sheets (если настроен URL)
+                // Отправка в Google Sheets
                 const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
-                if (!googleSheetUrl.includes('YOUR_DEPLOYMENT_ID')) {
-                    // URL настроен - отправляем
-                    fetch(googleSheetUrl, {
+                
+                try {
+                    await fetch(googleSheetUrl, {
                         method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
                         body: JSON.stringify(fullData)
-                    }).catch(err => console.log('Google Sheets не настроены'));
+                    });
+                    console.log('✅ Данные ПОСЛЕ отправлены в Google Sheets');
+                } catch (err) {
+                    console.log('⚠️ Ошибка отправки в Google Sheets:', err);
                 }
                 
-                // Показываем сообщение (работает БЕЗ Google Sheets!)
+                // Показываем сообщение
                 document.getElementById('surveySection').style.display = 'none';
                 document.getElementById('successMessage').style.display = 'block';
                 
