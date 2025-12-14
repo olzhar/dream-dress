@@ -612,21 +612,24 @@
                 // Сохраняем результаты локально
                 window.resultsData = fullData;
                 
-                // Отправка в Google Sheets
-                const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
-                
-                try {
-                    await fetch(googleSheetUrl, {
+                // Отправка в Google Sheets (ТОЛЬКО ОДИН РАЗ!)
+                if (!window.alreadySentToSheetsPosle) {
+                    window.alreadySentToSheetsPosle = true;  // Устанавливаем флаг СРАЗУ
+                    
+                    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
+                    
+                    fetch(googleSheetUrl, {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(fullData)
+                    }).then(() => {
+                        console.log('✅ Данные ПОСЛЕ отправлены в Google Sheets');
+                    }).catch(err => {
+                        console.error('❌ Ошибка отправки ПОСЛЕ:', err);
                     });
-                    console.log('✅ Данные ПОСЛЕ отправлены в Google Sheets');
-                } catch (err) {
-                    console.log('⚠️ Ошибка отправки в Google Sheets:', err);
                 }
                 
                 // Показываем сообщение
