@@ -590,6 +590,13 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Отправка...';
             
+            // ЗАЩИТА 1: Блокируем кнопку СРАЗУ
+            if (submitBtn.disabled && window.alreadySubmittedPosle) {
+                console.log('⛔ ПОСЛЕ - Форма уже отправлена!');
+                return;
+            }
+            window.alreadySubmittedPosle = true;
+            
             // Собираем данные ПОСЛЕ
             const formData = new FormData(this);
             const afterData = {};
@@ -612,13 +619,28 @@
                 // Сохраняем результаты локально
                 window.resultsData = fullData;
                 
+                // ЗАЩИТА 2: Проверяем что код НЕ был отправлен раньше
+                const sentCodes = JSON.parse(localStorage.getItem('sent_codes_posle') || '[]');
+                if (sentCodes.includes(beforeData.client_code)) {
+                    console.log('⛔ ПОСЛЕ - Этот код УЖЕ был отправлен:', beforeData.client_code);
+                    document.getElementById('resultsSection').style.display = 'block';
+                    document.getElementById('surveyForm').style.display = 'none';
+                    return;
+                }
+                
                 // Отправка в Google Sheets (ТОЛЬКО ОДИН РАЗ!)
                 console.log('🔍 ПОСЛЕ - Проверка флага window.alreadySentToSheetsPosle:', window.alreadySentToSheetsPosle);
                 
+                // ЗАЩИТА 3: Флаг в window
                 if (!window.alreadySentToSheetsPosle) {
                     console.log('✅ ПОСЛЕ - Флаг НЕ установлен - начинаем отправку');
                     window.alreadySentToSheetsPosle = true;  // Устанавливаем флаг СРАЗУ
                     console.log('🔒 ПОСЛЕ - Флаг установлен:', window.alreadySentToSheetsPosle);
+                    
+                    // Запоминаем что этот код отправлен
+                    sentCodes.push(beforeData.client_code);
+                    localStorage.setItem('sent_codes_posle', JSON.stringify(sentCodes));
+                    console.log('💾 ПОСЛЕ - Код сохранён в список отправленных:', beforeData.client_code);
                     
                     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
                     

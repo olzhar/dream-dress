@@ -542,6 +542,12 @@
             e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
+            
+            // ЗАЩИТА 1: Блокируем кнопку СРАЗУ
+            if (submitBtn.disabled) {
+                console.log('⛔ Кнопка уже заблокирована!');
+                return;
+            }
             submitBtn.disabled = true;
             submitBtn.textContent = 'Отправка...';
             
@@ -563,13 +569,29 @@
                 // Сохраняем данные локально
                 localStorage.setItem('dreamdress_before_' + clientCode, JSON.stringify(data));
                 
+                // ЗАЩИТА 2: Проверяем что код НЕ был отправлен раньше
+                const sentCodes = JSON.parse(localStorage.getItem('sent_codes_do') || '[]');
+                if (sentCodes.includes(clientCode)) {
+                    console.log('⛔ Этот код УЖЕ был отправлен:', clientCode);
+                    document.getElementById('clientCode').textContent = clientCode;
+                    document.getElementById('surveyForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    return;
+                }
+                
                 // Отправка в Google Sheets (ТОЛЬКО ОДИН РАЗ!)
                 console.log('🔍 Проверка флага window.alreadySentToSheets:', window.alreadySentToSheets);
                 
+                // ЗАЩИТА 3: Флаг в window
                 if (!window.alreadySentToSheets) {
                     console.log('✅ Флаг НЕ установлен - начинаем отправку');
                     window.alreadySentToSheets = true;  // Устанавливаем флаг СРАЗУ
                     console.log('🔒 Флаг установлен:', window.alreadySentToSheets);
+                    
+                    // Запоминаем что этот код отправлен
+                    sentCodes.push(clientCode);
+                    localStorage.setItem('sent_codes_do', JSON.stringify(sentCodes));
+                    console.log('💾 Код сохранён в список отправленных:', clientCode);
                     
                     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyBF88H7_1z1127ZXhfZKy1QrliumsrX02ueMf9QqdhFAbBNLku_Px2-lpzkCjRW-_Q4Q/exec';
                     
