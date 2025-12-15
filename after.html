@@ -606,13 +606,14 @@
             
             // Комбинируем с данными ДО
             const fullData = {
+                ...beforeData,  // Сначала все данные ДО
+                ...afterData,   // Потом данные ПОСЛЕ
+                // КРИТИЧНО: Эти поля ПОСЛЕ spread, чтобы НЕ перезаписались!
                 client_code: beforeData.client_code,
-                sheet_name: "Опросник ПОСЛЕ",  // Для Google Sheets
-                surveyType: "POSLE",  // ВАЖНО: тип опросника для Google Script
+                sheet_name: "Опросник ПОСЛЕ",
+                surveyType: "POSLE",  // ВАЖНО: ПОСЛЕ spread!
                 timestamp_before: beforeData.timestamp,
-                timestamp_after: new Date().toISOString(),
-                ...beforeData,
-                ...afterData
+                timestamp_after: new Date().toISOString()
             };
             
             try {
