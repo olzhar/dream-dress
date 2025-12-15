@@ -54,7 +54,7 @@
         
         .section-title {
             color: #7ba67d;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
             margin: 30px 0 20px 0;
             padding-bottom: 10px;
@@ -441,16 +441,25 @@
                         </div>
                     </div>
                     
-                    <!-- РЕАЛИЗАЦИЯ ЦЕЛЕЙ -->
-                    <div class="section-title">🎯 Насколько реализованы ваши цели?</div>
+                    <!-- ВЫ СТАВИЛИ ТАКИЕ ЦЕЛИ -->
+                    <div class="section-title">🎯 Вы ставили такие цели:</div>
                     
-                    <div id="goalsRealization"></div>
+                    <div id="goalsDisplay"></div>
                     
-                    <!-- ОТЗЫВ -->
-                    <div class="section-title" style="margin-top: 30px;">💬 Ваш отзыв о программе</div>
-                    <div class="form-group">
-                        <label>Напишите, пожалуйста, подробный отзыв о программе ПЛАТЬЕ МЕЧТЫ <span class="required">*</span></label>
-                        <textarea name="review" required placeholder="Поделитесь своими впечатлениями, что вам понравилось, что изменилось, какие результаты получили..." style="min-height: 120px;"></textarea>
+                    <!-- ПРОСЬБА ОБ ОТЗЫВЕ -->
+                    <div class="info-box" style="margin-top: 30px; background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border-left: 4px solid #7ba67d;">
+                        <h3 style="color: #2e7d32; margin-bottom: 15px; font-size: 20px;">💬 Напишите, пожалуйста, подробный отзыв о программе ПЛАТЬЕ МЕЧТЫ</h3>
+                        <p style="font-size: 16px; line-height: 1.6; color: #2c2c2c;">
+                            📱 <strong>В Телеграмме в разделе "Общение"</strong> поделитесь:
+                        </p>
+                        <ul style="margin: 15px 0; padding-left: 20px; line-height: 1.8;">
+                            <li>✅ Какие <strong>результаты</strong> вы получили?</li>
+                            <li>✅ Какие <strong>цели</strong> достигли?</li>
+                            <li>✅ Что <strong>нового и полезного</strong> узнали?</li>
+                        </ul>
+                        <p style="text-align: center; font-size: 20px; margin-top: 20px; color: #c1272d;">
+                            СПАСИБО ❤️
+                        </p>
                     </div>
                     
                     <button type="submit" class="btn btn-secondary" id="submitBtn">
@@ -523,47 +532,38 @@
             
             // НЕ предзаполняем измерения - пользователь вводит сам
             
-            // Загружаем цели
-            const goalsDiv = document.getElementById('goalsRealization');
+            // Загружаем цели только для показа
+            const goalsDiv = document.getElementById('goalsDisplay');
             let goalsHTML = '';
             
             if (beforeData.goal_physical) {
                 goalsHTML += `
-                    <div class="form-group">
-                        <label>По физическому здоровью:</label>
-                        <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 14px;">
-                            Ваша цель: "${beforeData.goal_physical}"
-                        </div>
-                        <textarea name="goal_physical_result" placeholder="Насколько реализована? Что изменилось?"></textarea>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #7ba67d;">
+                        <div style="color: #2e7d32; font-weight: 600; margin-bottom: 8px;">💪 По физическому здоровью:</div>
+                        <div style="color: #2c2c2c; font-size: 15px;">"${beforeData.goal_physical}"</div>
                     </div>
                 `;
             }
             
             if (beforeData.goal_emotional) {
                 goalsHTML += `
-                    <div class="form-group">
-                        <label>По эмоциональному здоровью:</label>
-                        <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 14px;">
-                            Ваша цель: "${beforeData.goal_emotional}"
-                        </div>
-                        <textarea name="goal_emotional_result" placeholder="Насколько реализована? Что изменилось?"></textarea>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #7ba67d;">
+                        <div style="color: #2e7d32; font-weight: 600; margin-bottom: 8px;">😊 По эмоциональному здоровью:</div>
+                        <div style="color: #2c2c2c; font-size: 15px;">"${beforeData.goal_emotional}"</div>
                     </div>
                 `;
             }
             
             if (beforeData.goal_image) {
                 goalsHTML += `
-                    <div class="form-group">
-                        <label>По образу Новая Я в ПЛАТЬЕ МЕЧТЫ:</label>
-                        <div style="background: #f5f5f5; padding: 12px; border-radius: 6px; margin-bottom: 10px; font-size: 14px;">
-                            Ваша цель: "${beforeData.goal_image}"
-                        </div>
-                        <textarea name="goal_image_result" placeholder="Насколько реализована? Что изменилось?"></textarea>
+                    <div style="background: #f5f5f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #7ba67d;">
+                        <div style="color: #2e7d32; font-weight: 600; margin-bottom: 8px;">👗 По образу Новая Я в ПЛАТЬЕ МЕЧТЫ:</div>
+                        <div style="color: #2c2c2c; font-size: 15px;">"${beforeData.goal_image}"</div>
                     </div>
                 `;
             }
             
-            goalsDiv.innerHTML = goalsHTML || '<p style="color: #666;">Цели не были указаны в опроснике ДО</p>';
+            goalsDiv.innerHTML = goalsHTML || '<p style="color: #666; padding: 15px; background: #f5f5f5; border-radius: 8px;">Цели не были указаны в опроснике ДО</p>';
         }
         
         // Инициализация шкал
@@ -646,6 +646,12 @@
                     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyND8WFHYUSObUGiPch9MNIAn10PZc6smlV7Kh7GhjvX930-hNqfEPbOXcrqYxrnsMgbQ/exec';
                     
                     console.log('📤 ПОСЛЕ - Отправляемые данные:', fullData);
+                    console.log('🔍 ПРОВЕРКА ПОЛЕЙ:');
+                    console.log('  goal_physical_result:', fullData.goal_physical_result);
+                    console.log('  goal_emotional_result:', fullData.goal_emotional_result);
+                    console.log('  goal_image_result:', fullData.goal_image_result);
+                    console.log('  review:', fullData.review);
+                    console.log('  surveyType:', fullData.surveyType);
                     
                     fetch(googleSheetUrl, {
                         method: 'POST',
@@ -712,7 +718,7 @@
             font-family: 'Montserrat', Arial, sans-serif;
             margin: 20px;
             background: white;
-            font-size: 26px;
+            font-size: 22px;
         }
         .header {
             background: linear-gradient(135deg, #7ba67d 0%, #6b9670 100%);
@@ -725,13 +731,13 @@
         }
         .header h1 {
             margin: 0;
-            font-size: 46px;
+            font-size: 42px;
             font-weight: 300;
             letter-spacing: 3px;
         }
         .header p {
             margin: 10px 0 0 0;
-            font-size: 26px;
+            font-size: 22px;
         }
         .congrats {
             background: #e8f5e9;
@@ -739,13 +745,13 @@
             border-radius: 12px;
             text-align: center;
             margin: 20px 0;
-            font-size: 26px;
+            font-size: 22px;
             color: #2e7d32;
             font-weight: 600;
         }
         .section-title {
             color: #7ba67d;
-            font-size: 26px;
+            font-size: 22px;
             border-bottom: 2px solid #e8f5e9;
             padding-bottom: 10px;
             margin: 30px 0 15px 0;
@@ -759,13 +765,13 @@
             padding: 12px;
             text-align: center;
             font-weight: 600;
-            font-size: 26px;
+            font-size: 22px;
         }
         .comparison-table td {
             padding: 12px;
             text-align: center;
             border-bottom: 1px solid #e0e0e0;
-            font-size: 26px;
+            font-size: 22px;
         }
         .diff-positive {
             color: #4caf50;
@@ -787,7 +793,7 @@
         .scale-name {
             font-weight: 600;
             flex: 1;
-            font-size: 26px;
+            font-size: 22px;
         }
         .scale-values {
             display: flex;
@@ -795,7 +801,7 @@
             align-items: center;
         }
         .scale-value {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: bold;
         }
         .goal-box {
@@ -808,10 +814,10 @@
             font-weight: 600;
             color: #7ba67d;
             margin-bottom: 8px;
-            font-size: 26px;
+            font-size: 22px;
         }
         .goal-original {
-            font-size: 26px;
+            font-size: 22px;
             color: #666;
             margin-bottom: 8px;
             font-style: italic;
@@ -819,7 +825,7 @@
         .goal-result {
             color: #2c2c2c;
             line-height: 1.6;
-            font-size: 26px;
+            font-size: 22px;
         }
     </style>
 </head>
@@ -890,7 +896,7 @@
             <div class="scale-name">${scale.name}</div>
             <div class="scale-values">
                 <span>ДО: <span class="scale-value" style="color: #c17b6f;">${scale.before}/10</span></span>
-                <span style="font-size: 26px; color: #7ba67d;">→</span>
+                <span style="font-size: 22px; color: #7ba67d;">→</span>
                 <span>ПОСЛЕ: <span class="scale-value" style="color: #7ba67d;">${scale.after}/10</span></span>
                 <span class="${diff > 0 ? 'diff-positive' : diff < 0 ? 'diff-negative' : ''}">(${diff > 0 ? '+' : ''}${diff})</span>
             </div>
@@ -953,7 +959,7 @@
             <p style="margin: 0 0 12px 0; font-weight: 500;">В результате нашей совместной работы меняется не только тело и мышление, но и вся жизнь.</p>
             
             <div style="margin: 20px 0; text-align: center;">
-                <p style="margin: 0 0 15px 0; font-weight: bold; color: #7ba67d; font-size: 24px;">
+                <p style="margin: 0 0 15px 0; font-weight: bold; color: #7ba67d; font-size: 22px;">
                     🎁 Для вас скидка 20% на консультацию!
                 </p>
                 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
